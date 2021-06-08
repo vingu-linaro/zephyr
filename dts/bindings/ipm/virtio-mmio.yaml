@@ -1,0 +1,22 @@
+# Copyright (c) 2019, STMicroelectronics
+# SPDX-License-Identifier: Apache-2.0
+
+description: VIRTIO MMIO
+
+compatible: "virtio-mmio"
+
+include: base.yaml
+
+properties:
+  device-mode:
+    type: boolean
+    required: false
+
+  dma-coherent:
+    type: boolean
+    required: false
+
+  memory-region:
+    type: phandle
+    required: true
+

@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig VIRTIO
+	bool "VIRTIO drivers"
+	help
+	  Include interrupt-based inter-processor mailboxes
+	  drivers in system configuration
+
+if VIRTIO
+
+
+config VIRTIO_MMIO
+	bool "IPM virtio-mmio driver"
+	help
+	  Driver for virtio-mmio
+
+module = VIRTIO
+module-str = virtio
+source "subsys/logging/Kconfig.template.log_config"
+
+endif #IPM
