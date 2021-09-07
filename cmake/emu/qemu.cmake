@@ -8,7 +8,8 @@ else()
   set_ifndef(QEMU_binary_suffix ${ARCH})
 endif()
 
-set(qemu_alternate_path $ENV{QEMU_BIN_PATH})
+#set(qemu_alternate_path $ENV{QEMU_BIN_PATH})
+set(qemu_alternate_path "/usr/local/bin/")
 if(qemu_alternate_path)
 find_program(
   QEMU
@@ -317,6 +318,15 @@ if(CONFIG_IVSHMEM)
     )
   endif()
 endif()
+
+    list(APPEND QEMU_FLAGS
+       -device vhost-user-scmi-device,chardev=vscmi0,id=scmi0,device-mode
+       -chardev socket,id=vscmi0,path=../vscmi-server0.sock
+       -device vhost-user-scmi-device,chardev=vscmi1,id=scmi1,device-mode
+       -chardev socket,id=vscmi1,path=../vscmi-server1.sock
+       -object memory-backend-file,id=virt_sram,size=1M,mem-path=/dev/shm/vmem0,share=on
+       -global virtio-mmio.force-legacy=false
+    )
 
 if(NOT QEMU_PIPE)
   set(QEMU_PIPE_COMMENT "\nTo exit from QEMU enter: 'CTRL+a, x'\n")
