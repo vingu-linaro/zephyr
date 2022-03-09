@@ -320,9 +320,9 @@ if(CONFIG_IVSHMEM)
 endif()
 
     list(APPEND QEMU_FLAGS
-       -device vhost-user-scmi-device,chardev=vscmi0,id=scmi0,device-mode
+       -device vhost-user-scmi-device,chardev=vscmi0,id=scmi0,device-mode=on
        -chardev socket,id=vscmi0,path=../vscmi-server0.sock
-       -device vhost-user-scmi-device,chardev=vscmi1,id=scmi1,device-mode
+       -device vhost-user-scmi-device,chardev=vscmi1,id=scmi1,device-mode=on
        -chardev socket,id=vscmi1,path=../vscmi-server1.sock
        -object memory-backend-file,id=virt_sram,size=1M,mem-path=/dev/shm/vmem0,share=on
        -global virtio-mmio.force-legacy=false
